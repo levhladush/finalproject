@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="employee_list_data" style="margin: 5px;">
+  <h3 class="display-5">Employee List</h3>
+
+  <table id="employee-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Date</th>
+        <th>Email</th>
+        <th>Manager</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for employee in object_list %}
+        <tr id="employee-row-{{ employee.pk }}">
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.position }}</td>
+          <td>{{ employee.date }}</td>
+          <td>{{ employee.email }}</td>
+          <td>{{ employee.manager.name }}</td>
+          <td><a class="btn btn-primary" href="{% url 'employee_edit' employee.pk %}">Edit</a></td>
+          <td><a class="btn btn-danger" href="{% url 'employee_delete' employee.pk %}">Delete</a></td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">No employees found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="//cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="//cdn.datatables.net/select/1.3.3/css/select.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+
+<script>
+  $("#employee-table").DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print',
+      ],
+      autoWidth: false,
+  });
+</script>
+{% endblock %}

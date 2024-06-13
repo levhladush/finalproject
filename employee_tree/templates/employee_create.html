@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+  <h3 class="display-2">Create New Employee</h3>
+  <div class="form-box">
+    <form method="post" style="margin: 5px;">
+      {% csrf_token %}
+      <label for="name">Name:</label>
+      <input class="form-control" style="width: 100%; background-color: #fff2f2;" type="text" name="name" id="name" required><br><br>
+      <label for="position">Position:</label>
+      <input class="form-control" style="width: 100%; background-color: #fff2f2;" type="text" name="position" id="position" required><br><br>
+      <label for="date">Date:</label>
+      <input class="form-control" style="width: 100%; background-color: #fff2f2;" type="date" name="date" id="date" required><br><br>
+      <label for="email">Email:</label>
+      <input class="form-control" style="width: 100%; background-color: #fff2f2;" type="email" name="email" id="email" required><br><br>
+      <label for="manager">Manager:</label>
+      <select class="form-control" style="width: 100%; background-color: #fff2f2;" name="manager" id="manager" required>
+        <option value="">-</option>
+        {% for manager in managers %}
+          <option value="{{ manager.pk }}">{{ manager.name }}</option>
+        {% endfor %}
+      </select><br><br>
+      <button type="submit" class="btn btn-success">Create Employee</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

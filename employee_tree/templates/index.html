@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load mptt_tags %}
+{% if nodes %}
+<ul class="list-group tree">
+  {% recursetree nodes %}
+    <li class="list-group-item" style="background-color: #deffe3;">
+        {{ node.name }} ({{node.position}})
+        {% if not node.is_leaf_node %}
+          <ul class=" subtree">
+            {{ children }}
+          </ul>
+        {% endif %}
+    </li>
+    {% endrecursetree %}
+</ul>
+{% else %}
+<form method="post" id="generate_employees" style="width: 15%; margin: 15px;">
+  {% csrf_token %}
+  <label for="name">Number of employees:</label>
+  <input class="form-control" style="width: 100%; background-color: #fff2f2;" type="number" name="generate_number" id="generate_number" min="1">
+  <button type="submit" class="btn btn-primary" style="margin: 5px 0;">Generate</button>
+</form>
+{% endif %}
+{% endblock content %}
