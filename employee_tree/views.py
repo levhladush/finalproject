@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from datetime import date as dt
-from app.models import Employee
+from .models import Employee
+from .forms import EmployeeForm
 from django.contrib.auth.models import User
-from app.forms import EmployeeForm
 from mptt.templatetags.mptt_tags import cache_tree_children
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
 from django.contrib.auth.mixins import LoginRequiredMixin

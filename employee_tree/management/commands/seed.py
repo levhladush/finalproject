@@ -1,7 +1,7 @@
 import random
 import datetime
 from django.core.management.base import BaseCommand
-from app.models import Employee
+from employee_tree.models import Employee
 from django_seed import Seed
 import faker
 
